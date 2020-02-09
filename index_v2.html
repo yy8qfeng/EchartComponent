@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Demo</title>
+		<script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+		<script src="js/echarts.min.js"></script>
+		<script src="js/myChart.js"></script>
+		
+	</head>
+	<body>
+		<div id="chartsId" class="main" style='width:1000px;height:500px;'></div>
+		<div id="chartsId1" class="main" style='width:1000px;height:500px;'></div>
+        <div id="chartsId2" class="main" style='width:600px;height:400px;'></div>
+	</body>
+	<script>
+		var myChartId='chartsId';
+		var myChartName='统计图-折线图';
+		var formatterFun=function (params,ticket,callback) {
+		            var res = params[0].name;
+		            for (var i = 0, l = params.length; i < l; i++) {
+		            	if(params[i].value==0){
+		            		res += '<br/>' + params[i].seriesName + ' : ' + params[i].value;
+		            	}else{
+		            		res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value*100).toFixed(5)+"%";
+		            	}
+		            }
+		            return res;
+    	};
+		var legendData=['次日留存率','三日留存率','七日留存率','三十日留存率'];
+		var xAxisData=["2017-03-01","02","03","04","05","06"];
+		var seriesType='line';
+		var barGap='80%';
+		var barCategoryGap='50%';
+		var seriesData=[];
+		seriesData[0]=[0.0499494,0.0732613,0.0757541,0.075925,0.0477412,0.0588606];
+		seriesData[1]=[0.041512,0.0320729,0.0356896,0.0252499,0.0250543,0.0361977];
+		seriesData[2]=[0.0202497,0.0168805,0.0128943,0.0191127,0.0293944,0.0217186];
+		seriesData[3]=[0,0,0,0,0,0];
+		myChart(myChartId,myChartName,formatterFun,legendData,xAxisData,seriesType,barGap,barCategoryGap,seriesData);
+		</script>
+		<script>
+		var myChartId='chartsId1';
+		var myChartName='统计图-柱状图';
+		var formatterFun=function (params,ticket,callback) {
+		            var res = params[0].name;
+		            for (var i = 0, l = params.length; i < l; i++) {
+		            	if(params[i].value==0){
+		            		res += '<br/>' + params[i].seriesName + ' : ' + params[i].value;
+		            	}else{
+		            		res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value*100).toFixed(5)+"%";
+		            	}
+		            }
+		            return res;
+    	};
+		var legendData=['次日留存率'];
+		var xAxisData=["2017-03-01","02","03","04","05","06"];
+		var seriesType='bar';
+		var barGap='80%';
+		var barCategoryGap='50%';
+		var seriesData=[];
+		//seriesData[0]=[0.0499494,0.0732613,0.0757541,0.075925,0.0477412,0.0588606];
+		seriesData[0]=[0.499494,0.732613,0.757541,0.75925,0.477412,0.588606];
+		myChart(myChartId,myChartName,formatterFun,legendData,xAxisData,seriesType,barGap,barCategoryGap,seriesData);
+		</script>
+		<script>
+		var myChartId='chartsId2';
+		var max=525;
+		var myChartName='统计图-扇形图';
+		var formatterFun= "{a} <br/>{b} : {c} ({d}%)";
+		var legendData=['演唱会','MV','KTV'];
+		var seriesData=[
+                {value:435, name:'演唱会'},
+                {value:525, name:'MV'},
+                {value:335, name:'KTV'}
+            ];
+		myChartPie(myChartId,max,myChartName,formatterFun,legendData,seriesData);
+		</script>
+</html>
